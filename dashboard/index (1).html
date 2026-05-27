@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Phân Tích Sinh Viên </title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo">🎓</div>
+    <div>
+      <div class="header-title">Analytics Dashboard</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="sem-badge" id="semBadge">HK1-2025</span>
+    <label class="upload-btn">📂 Tải file CSV<input type="file" id="csvInput" accept=".csv" /></label>
+  </div>
+</header>
+
+<main>
+  <div id="emptyState">
+    <div class="empty-icon">📊</div>
+    <h3>Chưa có dữ liệu</h3>
+    <p>Nhấn "Tải file CSV" góc trên phải để bắt đầu<br>hoặc kéo thả file CSV vào đây</p>
+  </div>
+
+  <div id="dashboard">
+    <div class="kpi-grid" id="kpiGrid"></div>
+    <div class="filter-bar" id="filterBar"></div>
+
+    <div class="row2" style="grid-template-columns:1fr">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">GPA trung bình theo lớp</span>
+          <span class="badge badge-g">Thang 4.0</span>
+        </div>
+        <div class="chart-wrap" style="height:230px"><canvas id="classChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Phân bố điểm chữ từng môn</span>
+          <span class="badge badge-p" id="subBadge">Toàn khoa</span>
+        </div>
+        <div class="chart-wrap" style="height:230px"><canvas id="subjectChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Phân bố xếp loại học lực</span>
+          <span class="badge badge-g">Theo GPA</span>
+        </div>
+        <div class="chart-wrap" style="height:230px"><canvas id="rankChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Danh sách sinh viên</span>
+        <span class="badge badge-b" id="tableCount">—</span>
+      </div>
+      <div class="table-controls">
+        <input type="text" class="search-box" id="searchInput" placeholder="🔍  Tìm họ tên hoặc MSSV..." />
+        <select class="sel" id="sortFilter">
+          <option value="gpa_desc">GPA giảm dần</option>
+          <option value="gpa_asc">GPA tăng dần</option>
+          <option value="name_asc">Tên A–Z</option>
+          <option value="mssv_asc">MSSV tăng dần</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table id="mainTable">
+          <thead id="tableHead"></thead>
+          <tbody id="studentTable"></tbody>
+        </table>
+      </div>
+      <div class="page-bar">
+        <div class="page-info" id="pageInfo"></div>
+        <div class="page-btns" id="pageBtns"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Link to external JavaScript file -->
+<script src="script.js"></script>
+</body>
+</html>
